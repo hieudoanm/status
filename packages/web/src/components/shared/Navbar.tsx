@@ -1,7 +1,8 @@
 import { APP_NAME } from '@status/constants';
 import Link from 'next/link';
+import { FC } from 'react';
 
-export const Navbar = () => {
+export const Navbar: FC = () => {
 	return (
 		<header className="w-full">
 			<div className="container mx-auto flex items-center justify-between gap-x-2 px-4 py-2 md:px-8 md:py-4">

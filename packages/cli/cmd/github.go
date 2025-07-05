@@ -2,25 +2,13 @@
 package cmd
 
 import (
-	"encoding/json"
-	"fmt"
 	"stts/utils"
 
 	"github.com/spf13/cobra"
 )
 
-// GithubStatus ...
-type GithubStatus struct {
-	Indicator string `json:"indicator"`
-}
-
-// GithubResponse ...
-type GithubResponse struct {
-	Status GithubStatus `json:"status"`
-}
-
-// statusGithubCmd represents the statusGithub command
-var statusGithubCmd = &cobra.Command{
+// githubCmd represents the statusGithub command
+var githubCmd = &cobra.Command{
 	Use:   "github",
 	Short: "A brief description of your command",
 	Long: `A longer description that spans multiple lines and likely contains examples
@@ -33,33 +21,20 @@ to quickly create a Cobra application.`,
 		utils.LogProgramName()
 		// Check Status
 		var url string = "https://www.githubstatus.com/api/v2/status.json"
-		fmt.Println(url)
-		responseByte, getError := utils.Get(url, utils.Options{})
-		if getError != nil {
-			fmt.Println("Error: ", getError)
-			return
-		}
-		// Parse response
-		var response GithubResponse
-		jsonError := json.Unmarshal(responseByte, &response)
-		if jsonError != nil {
-			fmt.Println("Error: ", jsonError)
-			return
-		}
-		fmt.Println("Success")
+		utils.PrintStatus(url)
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(statusGithubCmd)
+	rootCmd.AddCommand(githubCmd)
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// statusGithubCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// githubCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// statusGithubCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// githubCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

@@ -2,25 +2,13 @@
 package cmd
 
 import (
-	"encoding/json"
-	"fmt"
 	"stts/utils"
 
 	"github.com/spf13/cobra"
 )
 
-// VercelStatus ...
-type VercelStatus struct {
-	Indicator string `json:"indicator"`
-}
-
-// VercelResponse ...
-type VercelResponse struct {
-	Status VercelStatus `json:"status"`
-}
-
-// statusVercelCmd represents the statusVercel command
-var statusVercelCmd = &cobra.Command{
+// vercelCmd represents the statusVercel command
+var vercelCmd = &cobra.Command{
 	Use:   "vercel",
 	Short: "A brief description of your command",
 	Long: `A longer description that spans multiple lines and likely contains examples
@@ -33,33 +21,20 @@ to quickly create a Cobra application.`,
 		utils.LogProgramName()
 		// Check Status
 		var url string = "https://www.vercel-status.com/api/v2/status.json"
-		fmt.Println(url)
-		responseByte, getError := utils.Get(url, utils.Options{})
-		if getError != nil {
-			fmt.Println("Error: ", getError)
-			return
-		}
-		// Parse response
-		var response VercelResponse
-		jsonError := json.Unmarshal(responseByte, &response)
-		if jsonError != nil {
-			fmt.Println("Error: ", jsonError)
-			return
-		}
-		fmt.Println("Success")
+		utils.PrintStatus(url)
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(statusVercelCmd)
+	rootCmd.AddCommand(vercelCmd)
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// statusVercelCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// vercelCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// statusVercelCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// vercelCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

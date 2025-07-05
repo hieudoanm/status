@@ -2,25 +2,13 @@
 package cmd
 
 import (
-	"encoding/json"
-	"fmt"
 	"stts/utils"
 
 	"github.com/spf13/cobra"
 )
 
-// SupabaseStatus ...
-type SupabaseStatus struct {
-	Indicator string `json:"indicator"`
-}
-
-// SupabaseResponse ...
-type SupabaseResponse struct {
-	Status SupabaseStatus `json:"status"`
-}
-
-// statusSupabaseCmd represents the statusSupabase command
-var statusSupabaseCmd = &cobra.Command{
+// supabaseCmd represents the statusSupabase command
+var supabaseCmd = &cobra.Command{
 	Use:   "supabase",
 	Short: "A brief description of your command",
 	Long: `A longer description that spans multiple lines and likely contains examples
@@ -33,33 +21,20 @@ to quickly create a Cobra application.`,
 		utils.LogProgramName()
 		// Check Status
 		var url string = "https://status.supabase.com/api/v2/status.json"
-		fmt.Println(url)
-		responseByte, getError := utils.Get(url, utils.Options{})
-		if getError != nil {
-			fmt.Println("Error: ", getError)
-			return
-		}
-		// Parse response
-		var response SupabaseResponse
-		jsonError := json.Unmarshal(responseByte, &response)
-		if jsonError != nil {
-			fmt.Println("Error: ", jsonError)
-			return
-		}
-		fmt.Println("Success")
+		utils.PrintStatus(url)
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(statusSupabaseCmd)
+	rootCmd.AddCommand(supabaseCmd)
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// statusSupabaseCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// supabaseCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// statusSupabaseCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// supabaseCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
