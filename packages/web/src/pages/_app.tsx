@@ -23,7 +23,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
 			<Head>
 				<title>Status</title>
 			</Head>
-			<div className={`${geistSans.className} ${geistMono.className}`}>
+			<div className={`${geistSans.className} ${geistMono.className} bg-neutral-900 text-neutral-100`}>
 				<QueryClientProvider client={queryClient}>
 					<Component {...pageProps} />
 				</QueryClientProvider>

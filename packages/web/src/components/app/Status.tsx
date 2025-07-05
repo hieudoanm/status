@@ -15,7 +15,7 @@ const ServiceStatus: FC<{ service: string; url: string }> = ({ service = '', url
 	});
 
 	return (
-		<div className="w-full rounded-full border border-neutral-200 px-4 py-2">
+		<div className="w-full rounded-full border border-neutral-800 px-4 py-2">
 			<div className="flex items-center justify-between">
 				<p className="capitalize">
 					<Link
